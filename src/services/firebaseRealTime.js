@@ -3,11 +3,7 @@ import admin from "./firebaseServiceAccount.js";
 const db = admin.database();
 
 export async function getPlayer(nick) {
-  const snapshot = await db
-    .ref("players")
-    .orderByChild("nick")
-    .equalTo(nick)
-    .once("value");
+  const snapshot = await db.ref(`players/${nick}`).once("value");
   return snapshot.val();
 }
 
